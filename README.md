@@ -1,60 +1,36 @@
-# S3-to-Translate - Language Translation at Scale
+# Serverless File Translation System
 
-This auto translation repo contains two sample applications demonstrating two methods of translating documents automatically. The first integrates S3 to Amazon Translate, and the second modifies the workflow for scale.
+## Overview :
+Developed a serverless application that automatically processes and translates text files using AWS S3 and AWS Lambda. The system triggers a Lambda function whenever a file is uploaded, processes the content, and stores translated outputs.
 
-Important: this application uses various AWS services and there are costs associated with these services after the Free Tier usage - please see the [AWS Pricing page](https://aws.amazon.com/pricing/) for details. You are responsible for any AWS costs incurred. No warranty is implied in this example.
+## Architecture : 
+S3 Bucket → Lambda Trigger → Text Processing → AWS Translate → Output Storage
 
-To learn more about how this application works, see the article on the AWS Compute Blog: https://aws.amazon.com/blogs/compute/translating-documents-at-enterprise-scale-with-serverless/.
+## Features :
+- Event-driven architecture using AWS S3 and Lambda  
+- Automatic translation of uploaded text files  
+- Support for multiple target languages  
+- File validation to process only `.txt` files  
+- Structured logging and error handling for reliability  
 
-```bash
-.
-├── README.MD                   <-- This instructions file
-├── translatorFunction          <-- Source code for a lambda function
-│   └── app.js                  <-- Main Lambda handler
-│   └── translate.js            <-- Wrapper for Amazon Translate 
-```
+## Tech Stack :
+- AWS S3  
+- AWS Lambda  
+- AWS Translate  
+- Node.js  
 
-## Requirements
+## Key Improvements :
+- Added input validation to prevent invalid file processing  
+- Implemented structured logging for better debugging  
+- Enhanced error handling for robustness  
 
-* AWS CLI already configured with Administrator permission
-* [NodeJS 12.x installed](https://nodejs.org/en/download/)
+## How It Works :
+1. Upload a `.txt` file to the S3 bucket  
+2. Lambda function is triggered automatically  
+3. File content is translated into multiple languages  
+4. Translated files are stored in the `translations/` folder  
 
-## Installation Instructions
-
-Possible language list:
-ar zh zh-TW cs da nl fi fr de he hi id it ja ko ms no fa pl pt ru es sv tr
-
-1. [Create an AWS account](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html) if you do not already have one and login.
-
-1. Clone the repo onto your local development machine using `git clone`.
-
-1. There are two applications. A detailed description of these applications is available at *LINK TBD*.
-
-1. From the command line, change directory into v1 or v2 depending on the version required, then run:
-```
-sam build
-sam deploy --guided
-```
-Follow the prompts in the deploy process to set the stack name, AWS Region and other parameters.
-
-## Parameter Details
-
-* Target Language: a space-separated list of languages to translate the original text into (e.g. "fr es de")
-* InputBucketName: the unique name of a new S3 bucket for this application (bucket names must be lowercase only and globally unique across AWS)
-* BatchingBucketName: the unique name of a new S3 bucket for this application.
-* ResultsBucketName: the unique name of a new S3 bucket for this application (v2 only)
-
-## How it works
-
-* Upload a text file (ending in the suffix '.txt') to the target S3 bucket.
-* After a few seconds you will see translation files appearing in the 'translations' folder in the same bucket (or in the Results bucket for v2).
-
-## Best practices for invoking Lambda functions from S3
-
-When writing objects back to the same bucket, it's important to use different prefixes or suffixes in Lambda notification triggers to avoid recursively invoking the same Lambda function. If your notification ends up writing to the bucket that triggers the notification, this could cause an execution loop. For example, if the bucket triggers a Lambda function each time an object is uploaded, and the function uploads an object to the bucket, then the function indirectly triggers itself. To avoid this, use two buckets, or configure the trigger to only apply to a prefix used for incoming objects. To learn more, read more about [configuring S3 notifications](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html).
-
-==============================================
-
-Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-SPDX-License-Identifier: MIT-0
+## Learning Outcomes :
+- Built and understood event-driven cloud architecture  
+- Gained hands-on experience with serverless computing  
+- Worked with AWS services for real-time data processing  
