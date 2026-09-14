@@ -5,7 +5,9 @@
 🔗 **[Try the live demo](https://file-translator-vert.vercel.app/)** — a lightweight
 version of this system deployed on Vercel for easy testing (uses a public
 translation API in place of AWS Translate, since Vercel doesn't run AWS
-infrastructure). The architecture below is what's actually deployed on AWS.
+infrastructure).
+For more details take a look at : (https://github.com/mancitizen17/file-translator)*
+The architecture below is what's actually deployed on AWS.
 
 ## Overview
 
