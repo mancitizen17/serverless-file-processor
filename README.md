@@ -50,9 +50,3 @@ S3 Bucket → Lambda Trigger → Text Processing → AWS Translate → Output St
 2. Lambda function is triggered automatically
 3. File content is translated into multiple languages
 4. Translated files are stored in the `translations/` folder
-
-## Learning Outcomes
-
-- Built and understood event-driven cloud architecture
-- Gained hands-on experience with serverless computing
-- Worked with AWS services for real-time data processing
